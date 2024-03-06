@@ -30,7 +30,31 @@ public class ApiFatecApplication {
 	int numero (@PathVariable int num) {
 		return num;
 	}
-	
+	@RequestMapping("/idade/{idade}")
+	String idade (@PathVariable String idade) {
+		int num =Integer.parseInt(idade);
+		if (num < 12){
+			idade="Criança";
+			return idade;
+		}
+		if (num<=18){
+			idade="Adolescente";
+			return idade;
+		}
+		if (num<60){
+			idade="Adulto";
+			return idade;
+		}
+		if (num>60) {
+			idade="Idoso";
+			return idade;
+		}
+		else {
+			idade="Idade Inválida";
+			return idade;
+		}
+		
+	}
 	
 	public static void main(String[] args) {
 		SpringApplication.run(ApiFatecApplication.class, args);
