@@ -32,27 +32,33 @@ public class ApiFatecApplication {
 	}
 	@RequestMapping("/idade/{idade}")
 	String idade (@PathVariable String idade) {
-		int num =Integer.parseInt(idade);
-		if (num < 12){
-			idade="Criança";
-			return idade;
-		}
-		if (num<=18){
-			idade="Adolescente";
-			return idade;
-		}
-		if (num<60){
-			idade="Adulto";
-			return idade;
-		}
-		if (num>60) {
-			idade="Idoso";
-			return idade;
-		}
-		else {
-			idade="Idade Inválida";
-			return idade;
-		}
+		try {
+			
+			int num =Integer.parseInt(idade);
+			if (num<0) {
+				throw new NumberFormatException();
+				}
+			if (num < 12){
+				idade="Criança";
+				return idade;
+				}
+			if (num<=18){
+				idade="Adolescente";
+				return idade;
+				}
+			if (num<60){
+				idade="Adulto";
+				return idade;
+				}
+			else{
+				idade="Idoso";
+				return idade;
+				}
+
+			} catch (NumberFormatException e){
+				idade="Idade Inválida";
+				return idade;
+			}
 		
 	}
 	
