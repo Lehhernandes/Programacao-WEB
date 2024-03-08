@@ -1,7 +1,5 @@
 package br.com.api.fatec.apifatec.controllers.exercicios;
 
-public class ExerciciosController {
-
+public class AnimalController {
 
 }
- 
