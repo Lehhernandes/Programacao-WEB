@@ -5,15 +5,10 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import br.com.api.fatec.apifatec.domain.cliente.ClienteRepository;
 import br.com.api.fatec.apifatec.entities.Cliente;
-import jakarta.websocket.server.PathParam;
 
-@RestController
 @SpringBootApplication
 public class ApiFatecApplication {
 	@Bean
@@ -35,12 +30,9 @@ public class ApiFatecApplication {
 			
 			clienteRepository.save(cliente2);
 		};
-	}	
-	
+	}
 	
 	public static void main(String[] args) {
 		SpringApplication.run(ApiFatecApplication.class, args);
 	}
-
 }
- 
