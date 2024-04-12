@@ -1,10 +1,11 @@
 package br.com.api.fatec.apifatec.domain.cliente;
 
-import br.com.api.fatec.apifatec.entities.Cliente;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import br.com.api.fatec.apifatec.entities.Cliente;
 
 @Service
 public class ClienteService {
@@ -24,6 +25,12 @@ public class ClienteService {
 	}
 
 	public void deletarCliente(Long id) {
+		Cliente cliente = encontrarClientePorId(id);
+		
+		if(cliente == null)
+		{
+			throw new IllegalArgumentException("Cliente não encontrado.");
+		}
 		clienteRepository.deleteById(id);
 	}
 	

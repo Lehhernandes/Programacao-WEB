@@ -7,28 +7,32 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import br.com.api.fatec.apifatec.domain.cliente.ClienteRepository;
+import br.com.api.fatec.apifatec.domain.produto.ProdutoRepository;
 import br.com.api.fatec.apifatec.entities.Cliente;
+import br.com.api.fatec.apifatec.entities.Produto;
 
 @SpringBootApplication
 public class ApiFatecApplication {
 	@Bean
-	public CommandLineRunner run(@Autowired ClienteRepository clienteRepository) {
+	public CommandLineRunner run(@Autowired ProdutoRepository produtoRepository, ClienteRepository clienteRepository) {
 		return args -> {
+			//Register initial product
+			Produto produto = new Produto();
+			produto.setDescricao("Batata frita");
+			produto.setQuantidadeEstoque(10);
+			produto.setPreco(9.99);
+			produto.setAtivo(true);
+			
+			produtoRepository.save(produto);
+			
+			//Register initial client
 			Cliente cliente = new Cliente();
-			cliente.setNome("Danilo");
-			cliente.setEmail("h2danilofatec@hotmail.com");
-			cliente.setEndereco("Rua xxx, 126");
-			cliente.setRazaoSocial("Danilo");
+			cliente.setNome("João neto");
+			cliente.setEmail("netovitu@gmail.com");
+			cliente.setEndereco("Rua Vereador Roque Motta, 319");
+			cliente.setRazaoSocial("NETOVITU");
 			
 			clienteRepository.save(cliente);
-			
-			Cliente cliente2 = new Cliente();
-			cliente2.setNome("Arthur");
-			cliente2.setEmail("h2danilosfatec@hotmail.com");
-			cliente2.setEndereco("Rua xxx, 126");
-			cliente2.setRazaoSocial("Arthur");
-			
-			clienteRepository.save(cliente2);
 		};
 	}
 	

@@ -3,8 +3,6 @@ package br.com.api.fatec.apifatec.controllers;
 import java.util.List;
 
 import br.com.api.fatec.apifatec.domain.cliente.ClienteService;
-import br.com.api.fatec.apifatec.domain.cliente.ClienteMapper;
-import br.com.api.fatec.apifatec.domain.cliente.ClienteDTO;
 import br.com.api.fatec.apifatec.entities.Cliente;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,6 +23,8 @@ public class ClienteController {
 	
 	@Autowired
 	private ClienteService clienteService;
+	
+	/*Listar todos clientes cadastrados*/
 
 	@GetMapping
 	public ResponseEntity<List<Cliente>> listarClientes() {
@@ -32,25 +32,30 @@ public class ClienteController {
 		return new ResponseEntity<>(clientes, HttpStatus.OK);
 	}
 	
+	
+	/*Buscar cliente por Id*/
 	@GetMapping("/{id}")
 	public ResponseEntity<Cliente> encontrarClientePorId(@PathVariable Long id) {
 		Cliente cliente = clienteService.encontrarClientePorId(id);
 		return cliente != null ? new ResponseEntity<>(cliente, HttpStatus.OK)
-				: new ResponseEntity<>(HttpStatus.NOT_FOUND);
+			: new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
 	
-	@PostMapping()
+	/*Criar novo cliente*/
+	@PostMapping
 	public ResponseEntity<Cliente> salvarCliente(@RequestBody Cliente cliente) {
 		Cliente clienteSalvo = clienteService.salvarCliente(cliente);
 		return new ResponseEntity<>(clienteSalvo, HttpStatus.CREATED);
 	}
 	
+	/*Excluir cliente pelo Id*/
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> deletarCliente(@PathVariable Long id) {
 		clienteService.deletarCliente(id);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 	
+	/*Atualizar cliente pelo Id*/
 	@PutMapping("/{id}")
 	public ResponseEntity<Cliente> AtualizarCliente(@PathVariable Long id, @RequestBody Cliente cliente) {
 		Cliente clienteAtualizado = clienteService.atualizarCliente(id, cliente);
